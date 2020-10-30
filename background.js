@@ -8,7 +8,6 @@ chrome.browserAction.onClicked.addListener(function (tab) {
         const display = style.getPropertyValue("display");
         const position = style.getPropertyValue("position");
         const visibility = style.getPropertyValue("visibility");
-        console.log(element.innerText, display);
         const hasForbiddenTag = [
           "HEADER",
           "FOOTER",
@@ -35,7 +34,7 @@ chrome.browserAction.onClicked.addListener(function (tab) {
     }
 
     const selectors = document.body.querySelectorAll(
-      "p, pre, h1, h2, h3, img, li"
+      "p, pre, h1, h2, h3, h4, h5, img, li"
     );
 
     const contents = Array.from(selectors).map((node) => {
@@ -55,7 +54,13 @@ chrome.browserAction.onClicked.addListener(function (tab) {
         return `<h2 style="font-size: 16px">${node.innerText}</h2>`;
       }
       if (node.tagName === "H3")
-        return `<h3 style="font-size: 14px; margin: 0;">${node.innerText}</h3>`;
+        return `<h3 style="font-size: 15px; margin: 0;">${node.innerText}</h3>`;
+      if (node.tagName === "H4")
+        return `<h4 style="font-size: 14px; margin: 0;">${node.innerText}</h4>`;
+      if (node.tagName === "H5") {
+        console.log("h5");
+        return `<h5 style="font-size: 13px; margin: 0;">${node.innerText}</h5>`;
+      }
 
       if (node.tagName === "PRE")
         return `<pre 
