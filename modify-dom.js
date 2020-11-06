@@ -46,7 +46,7 @@ function modifyDOM() {
     }
 
     if (node.tagName === "H1")
-      return `<h1 style="font-size: 18px">${node.innerText}</h1>`;
+      return `<h1 style="font-size: 18px; margin: 0">${node.innerText}</h1>`;
     if (node.tagName === "H2") {
       if (node.closest("li")) {
         node.remove();
@@ -63,7 +63,8 @@ function modifyDOM() {
       return `<h5 style="font-size: 13px; margin: 0;">${node.innerText}</h5>`;
     }
 
-    if (node.tagName === "PRE")
+    if (node.tagName === "PRE") {
+      const code = node.querySelector("code");
       return `<pre 
         style="background-color: unset;
         font-size: 12px;
@@ -76,7 +77,8 @@ function modifyDOM() {
         break-inside: avoid;
         overflow: visible;
         white-space: pre-line;">
-        <code style="color: black;background: unset;">${node.innerHTML}</code></pre>`;
+        ${code.innerHTML}</pre>`;
+    }
 
     if (node.tagName === "IMG") {
       if (node.closest("li")) return null;
@@ -109,6 +111,8 @@ function modifyDOM() {
   printContainer.id = "print-this";
   printContents.style.columnCount = 2;
   printContents.style.overflow = "visible";
+  printContents.style.backgroundColor = "white";
+  printContents.style.color = "black";
 
   contents
     .filter((c) => c !== null)
@@ -123,6 +127,10 @@ function modifyDOM() {
     img.style.breakInside = "avoid";
   });
 
+  printContainer.querySelectorAll("*").forEach((img) => {
+    img.style.color = "black";
+  });
+
   // printContainer.querySelectorAll("li").forEach((li) => {
   //   li.innerHTML = li.innerText;
   // });
@@ -130,6 +138,8 @@ function modifyDOM() {
   document.body.innerHTML = printContainer.innerHTML;
   document.body.style.padding = 0;
   document.body.style.top = 0;
+  document.querySelector('html').style.backgroundColor = "white"
+
 
   window.print();
 
@@ -137,4 +147,3 @@ function modifyDOM() {
 }
 
 modifyDOM();
-
