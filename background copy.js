@@ -136,6 +136,6 @@ chrome.browserAction.onClicked.addListener(function (tab) {
   }
   // const code = modifyDOM();
   chrome.tabs.executeScript({
-    file: "modify-dom.js",
+    code: "(" + modifyDOM + ")();",
   });
 });
