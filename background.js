@@ -75,7 +75,7 @@ chrome.browserAction.onClicked.addListener(function (tab) {
         break-inside: avoid;
         overflow: visible;
         white-space: pre-line;">
-        <code style="color: black;background: unset;">${node.innerHTML}</code></pre>`;
+        <code style="color: black;background-color: white !important;">${node.innerHTML}</code></pre>`;
 
       if (node.tagName === "IMG") {
         if (node.closest("li")) return null;
@@ -122,9 +122,9 @@ chrome.browserAction.onClicked.addListener(function (tab) {
       img.style.breakInside = "avoid";
     });
 
-    // printContainer.querySelectorAll("li").forEach((li) => {
-    //   li.innerHTML = li.innerText;
-    // });
+    printContainer.querySelectorAll("code").forEach((code) => {
+      code.style.backgroundColor = "white";
+    });
 
     document.body.innerHTML = printContainer.innerHTML;
     document.body.style.padding = 0;
